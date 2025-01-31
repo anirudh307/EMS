@@ -1,15 +1,6 @@
 import React, { useState } from "react";
-import {
-  Container,
-  TextField,
-  Button,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  Box,
-  Paper,
-  Link,
-} from "@mui/material";
+import { Container, TextField, Button, Typography, Checkbox, FormControlLabel, Box, Paper, Link,} from "@mui/material";
+import Fingerprint from '@mui/icons-material/Fingerprint';
 
 const UserLogin = () => {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
@@ -58,7 +49,7 @@ const UserLogin = () => {
           }}
         >
           <Typography variant="h5" fontWeight="bold">
-            Login to system
+           User Login to system
           </Typography>
           <Typography variant="body2" color="gray" mb={3}>
             Please enter your login information or{" "}
@@ -91,8 +82,8 @@ const UserLogin = () => {
               control={<Checkbox checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />}
               label="Remember me"
             />
-            <Button type="submit" variant="contained" fullWidth sx={{ mt: 2, borderRadius: 5, background: "linear-gradient(45deg, #ff8a00, #e52e71)" }}>
-              Log in
+            <Button type="submit" variant="contained" sx={{ mt: 2, borderRadius: 2,background: "linear-gradient(45deg,rgb(52, 40, 27), #e52e71)" ,minWidth: 220 }}>
+              Login<Fingerprint />
             </Button>
           </form>
         </Box>
