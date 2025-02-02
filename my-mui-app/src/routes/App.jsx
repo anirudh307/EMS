@@ -12,6 +12,8 @@ import Navbar from "../componants/Navbar";
 import Home from "./Home";
 import Admin from "../componants/Admin";
 import User from "../componants/User";
+import Feedback from "../componants/Feedback";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/admin-Login" element={<Admin />} />
         <Route path="/user-Login" element={<User />} />
+        <Route path="/feedback" element={<Feedback />} />
       </Routes>
            <Footer/>
      </Router>

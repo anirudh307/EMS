@@ -1,19 +1,15 @@
 import React, { useState } from "react";
-import {Container,
-  TextField,
-  Button,
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  Box,
-  Paper,
-  Link,
-} from "@mui/material";
+import {Container,TextField,Button,Typography,Checkbox,FormControlLabel,Box,Paper,Link} from "@mui/material";
 import Fingerprint from '@mui/icons-material/Fingerprint';
+import LoginAdmin from "./admin Componants/LoginAdmin";
+import SnackBar from "../componants/admin Componants/SnackBar";
+import Notify from "./Notify.jsx";
 
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [rememberMe, setRememberMe] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  
+  const [error, setError] = useState(false); 
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -21,7 +17,13 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login Data:", credentials, "Remember Me:", rememberMe);
+    if (credentials.username === "admin" && credentials.password === "password123") {
+      setIsLoggedIn(true);  
+      setError(false);
+    } else {
+      setIsLoggedIn(false);  
+      setError(true);
+    }
   };
 
   return (
@@ -108,6 +110,13 @@ const AdminLogin = () => {
           }}
         />
       </Paper>
+
+
+
+      {/* Conditional rendering based on login status */}
+      {isLoggedIn && <LoginAdmin />}
+      {error && <Notify message="Invalid login credentials. Please try again!" />}
+      <SnackBar open={isLoggedIn} message="Login successful!" />
     </Box>
   );
 };

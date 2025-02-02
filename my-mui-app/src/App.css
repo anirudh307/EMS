@@ -67,8 +67,6 @@
   padding: 20px;
   background-color: #f9f9f9;
   height: 450px;
-  /* border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .description-section h1 {
@@ -233,4 +231,11 @@ p {
   }
 }
 
+
+/* .feedback{
+  background-image: url("https://www.shutterstock.com/shutterstock/photos/2478722649/display_1500/stock-photo-customer-review-satisfaction-feedback-survey-concept-customer-can-evaluate-quality-of-service-2478722649.jpg");
+  background-size: cover; 
+  background-repeat: no-repeat;
+  
+} */
 
