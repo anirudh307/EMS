@@ -11,26 +11,31 @@ import { useDemoRouter } from '@toolpad/core/internal';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LayersIcon from '@mui/icons-material/Layers';
+import PersonIcon from '@mui/icons-material/Person';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const NAVIGATION = [
-  { kind: 'header', title: 'Admin Panel' },
-  { segment: 'Employee Adminstration', title: 'Employees', icon: <DashboardIcon /> },
-  { segment: 'Salery Adminstration', title: 'Salery', icon: <ShoppingCartIcon /> },
+  { kind: 'header', title: 'User Dashboard' },
+  { segment: 'dashboard', title: 'Home', icon: <DashboardIcon /> },
+  { segment: 'orders', title: 'My Orders', icon: <ShoppingCartIcon /> },
   { kind: 'divider' },
-  { kind: 'header', title: 'Analytics' },
+  { kind: 'header', title: 'User Analytics' },
   {
-    segment: 'Leave Adminstration',
-    title: 'Leaves',
+    segment: 'reports',
+    title: 'Reports',
     icon: <BarChartIcon />,
     children: [
-      { segment: 'approved', title: 'approved', icon: <DescriptionIcon /> },
-      { segment: 'submitted', title: 'submitted', icon: <DescriptionIcon /> },
+      { segment: 'purchases', title: 'Purchase History', icon: <DescriptionIcon /> },
+      { segment: 'activity', title: 'User Activity', icon: <DescriptionIcon /> },
     ],
   },
-  { segment: 'Reviews', title: 'Reviews', icon: <LayersIcon /> },
+  { segment: 'profile', title: 'Profile', icon: <PersonIcon /> },
+  { segment: 'favorites', title: 'Favorites', icon: <FavoriteIcon /> },
+  { segment: 'settings', title: 'Settings', icon: <SettingsIcon /> },
 ];
 
-const demoTheme = createTheme({
+const userTheme = createTheme({
   cssVariables: { colorSchemeSelector: 'data-toolpad-color-scheme' },
   colorSchemes: { light: true, dark: true },
   breakpoints: {
@@ -38,35 +43,35 @@ const demoTheme = createTheme({
   },
 });
 
-function DemoPageContent({ pathname }) {
+function UserPageContent({ pathname }) {
   return (
     <Box sx={{ py: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-      <Typography>Dashboard content for {pathname}</Typography>
+      <Typography>User dashboard content for {pathname}</Typography>
     </Box>
   );
 }
 
-DemoPageContent.propTypes = {
+UserPageContent.propTypes = {
   pathname: PropTypes.string.isRequired,
 };
 
-function LoginAdmin(props) {
+function LoginUser(props) {
   const router = useDemoRouter('/dashboard');
 
   const [session, setSession] = React.useState({
     user: {
-      name: 'Bharat Kashyap',
-      email: 'bharatkashyap@outlook.com',
-      image: 'https://avatars.githubusercontent.com/u/19550456',
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      image: 'https://avatars.githubusercontent.com/u/12345678',
     },
   });
 
   const authentication = React.useMemo(() => ({
     signIn: () => setSession({
       user: {
-        name: 'Bharat Kashyap',
-        email: 'bharatkashyap@outlook.com',
-        image: 'https://avatars.githubusercontent.com/u/19550456',
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        image: 'https://avatars.githubusercontent.com/u/12345678',
       },
     }),
     signOut: () => setSession(null),
@@ -77,20 +82,19 @@ function LoginAdmin(props) {
       navigation={NAVIGATION}
       branding={{
         logo: <img src="https://mui.com/static/logo.png" alt="MUI logo" />,
-        title: 'Admin Dashboard',
+        title: 'User Dashboard',
         homeUrl: '/toolpad/core/introduction',
       }}
       session={session}
       authentication={authentication}
       router={router}
-      theme={demoTheme}
+      theme={userTheme}
     >
       <DashboardLayout>
-        <DemoPageContent pathname={router.pathname} />
+        <UserPageContent pathname={router.pathname} />
       </DashboardLayout>
     </AppProvider>
   );
 }
 
-export default LoginAdmin;
-
+export default LoginUser;

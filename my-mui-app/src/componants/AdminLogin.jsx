@@ -18,7 +18,7 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (credentials.username === "admin" && credentials.password === "password123") {
+    if (credentials.username === "admin" && credentials.password === "admin") {
       setIsLoggedIn(true);  
       setShowSnackbar(true);
     } else {
@@ -31,7 +31,6 @@ const AdminLogin = () => {
       {isLoggedIn ? (
         <>
           <LoginAdmin />
-          <SnackBar open={showSnackbar} message="Login successful!" />
         </>
       ) : (
         <Box
