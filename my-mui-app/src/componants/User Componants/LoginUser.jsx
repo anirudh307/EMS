@@ -14,6 +14,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { useEffect } from "react";  // Import useEffect
 
 const NAVIGATION = [
   { kind: 'header', title: 'User Dashboard' },
@@ -55,7 +56,7 @@ UserPageContent.propTypes = {
   pathname: PropTypes.string.isRequired,
 };
 
-function LoginUser(props) {
+function LoginUser({ setShowNavbar }) {  
   const router = useDemoRouter('/dashboard');
 
   const [session, setSession] = React.useState({
@@ -66,6 +67,13 @@ function LoginUser(props) {
     },
   });
 
+  // Hide Navbar when this component is mounted
+  useEffect(() => {
+    setShowNavbar(false);  // Hide Navbar
+
+    return () => setShowNavbar(true);  
+  }, [setShowNavbar]);
+
   const authentication = React.useMemo(() => ({
     signIn: () => setSession({
       user: {
@@ -74,7 +82,7 @@ function LoginUser(props) {
         image: 'https://avatars.githubusercontent.com/u/12345678',
       },
     }),
-    signOut: () => setSession(null),
+    signOut: () => setSession(),
   }), []);
 
   return (

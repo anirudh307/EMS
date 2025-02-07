@@ -1,12 +1,15 @@
 import React from "react";
 import AdminLogin from "./AdminLogin";
 import { CssBaseline } from "@mui/material";
+import { useEffect } from "react";
+import Heading from "./Heading";
 
-function Admin() {
+function Admin({setShowNavbar}) {
   return (
     <>
+    <Heading/>
       <CssBaseline />
-      <AdminLogin />
+      <AdminLogin setShowNavbar={setShowNavbar}/>
     </>
   );
 }

@@ -1,12 +1,14 @@
 import React from "react";
 import { CssBaseline } from "@mui/material";
 import UserLogin from "./UserLogin";
+import Heading from "./Heading";
 
-function User() {
+function User({setShowNavbar}) {
   return (
     <>
+    <Heading/>
       <CssBaseline />
-      <UserLogin />
+      <UserLogin setShowNavbar={setShowNavbar}/>
     </>
   );
 }

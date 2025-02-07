@@ -11,6 +11,7 @@ import { useDemoRouter } from '@toolpad/core/internal';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LayersIcon from '@mui/icons-material/Layers';
+import { useEffect } from "react";
 
 const NAVIGATION = [
   { kind: 'header', title: 'Admin Panel' },
@@ -50,7 +51,7 @@ DemoPageContent.propTypes = {
   pathname: PropTypes.string.isRequired,
 };
 
-function LoginAdmin(props) {
+function LoginAdmin({ setShowNavbar }) {
   const router = useDemoRouter('/dashboard');
 
   const [session, setSession] = React.useState({
@@ -60,6 +61,13 @@ function LoginAdmin(props) {
       image: 'https://avatars.githubusercontent.com/u/19550456',
     },
   });
+
+  // Hide the Navbar when component mounts and show it when unmounting
+  useEffect(() => {
+    setShowNavbar(false);  // Hide Navbar when LoginAdmin mounts
+
+    return () => setShowNavbar(true);  // Show Navbar when LoginAdmin unmounts
+  }, [setShowNavbar]);
 
   const authentication = React.useMemo(() => ({
     signIn: () => setSession({
@@ -93,4 +101,3 @@ function LoginAdmin(props) {
 }
 
 export default LoginAdmin;
-

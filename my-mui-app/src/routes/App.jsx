@@ -14,18 +14,21 @@ import Admin from "../componants/Admin";
 import User from "../componants/User";
 import Feedback from "../componants/Feedback";
 import "bootstrap/dist/css/bootstrap.min.css";
+import FeedbackMain from "../componants/FeedbackMain";
 
 
 function App() {
+  const [showNavbar, setShowNavbar] = useState(true);
+
   return <>
   <Router>
-      <Navbar></Navbar>
+  {showNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/admin-Login" element={<Admin />} />
-        <Route path="/user-Login" element={<User />} />
-        <Route path="/feedback" element={<Feedback />} />
+        <Route path="/about" element={<About setShowNavbar={setShowNavbar}/>} />
+        <Route path="/admin-Login" element={<Admin setShowNavbar={setShowNavbar}/>} />
+        <Route path="/user-Login" element={<User setShowNavbar={setShowNavbar}/>} />
+        <Route path="/feedback" element={<FeedbackMain setShowNavbar={setShowNavbar}/>} />
       </Routes>
            <Footer/>
      </Router>

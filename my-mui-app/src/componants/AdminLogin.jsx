@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography, Checkbox, FormControlLabel, Box, Paper, Link } from "@mui/material";
+import { TextField, Button, Typography, Checkbox, FormControlLabel, Box, Paper, Link,Fade } from "@mui/material";
 import Fingerprint from '@mui/icons-material/Fingerprint';
 import LoginAdmin from "./admin Componants/LoginAdmin";
 import SnackBar from "../componants/admin Componants/SnackBar";
 import Notify from "./Notify.jsx";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
-const AdminLogin = () => {
+const AdminLogin = ({ setShowNavbar }) => {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);  
   const [showNotify, setShowNotify] = useState(false);  
   const [showSnackbar, setShowSnackbar] = useState(false);
+   const [showPage, setShowPage] = useState(false);
+   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -19,8 +23,12 @@ const AdminLogin = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (credentials.username === "admin" && credentials.password === "admin") {
-      setIsLoggedIn(true);  
-      setShowSnackbar(true);
+      setLoading(true); // Show Backdrop
+      setTimeout(() => {
+        setIsLoggedIn(true);  
+        setLoading(false);
+        setTimeout(() => setShowPage(true), 500); // Delay fade-in effect
+      }, 2000);
     } else {
       setShowNotify(true); // Show error message
     }
@@ -29,9 +37,11 @@ const AdminLogin = () => {
   return (
     <>
       {isLoggedIn ? (
-        <>
-          <LoginAdmin />
-        </>
+        <Fade in={showPage} timeout={800}>
+          <div>
+          <LoginAdmin setShowNavbar={setShowNavbar}/>
+          </div>
+        </Fade>
       ) : (
         <Box
           sx={{
@@ -105,6 +115,10 @@ const AdminLogin = () => {
                   sx={{ mt: 2, borderRadius: 2, background: "linear-gradient(45deg,rgb(52, 40, 27), #e52e71)", minWidth: 220 }}
                 >
                   LogIn <Fingerprint />
+                    {/* Backdrop During Delay */}
+                        <Backdrop open={loading}  sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}>
+                        <CircularProgress color="success" />
+                        </Backdrop>
                 </Button>
               </form>
             </Box>
