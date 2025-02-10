@@ -15,6 +15,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useEffect } from "react";  // Import useEffect
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NAVIGATION = [
   { kind: 'header', title: 'User Dashboard' },
@@ -56,8 +57,10 @@ UserPageContent.propTypes = {
   pathname: PropTypes.string.isRequired,
 };
 
-function LoginUser({ setShowNavbar }) {  
+function LoginUser({ setShowNavbar , setShowHeading}) {  
   const router = useDemoRouter('/dashboard');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [session, setSession] = React.useState({
     user: {
@@ -74,6 +77,11 @@ function LoginUser({ setShowNavbar }) {
     return () => setShowNavbar(true);  
   }, [setShowNavbar]);
 
+   useEffect(()=>{
+      setShowHeading(false);
+      return ()=> setShowHeading(true);
+    },[setShowHeading]);
+
   const authentication = React.useMemo(() => ({
     signIn: () => setSession({
       user: {
@@ -82,8 +90,14 @@ function LoginUser({ setShowNavbar }) {
         image: 'https://avatars.githubusercontent.com/u/12345678',
       },
     }),
-    signOut: () => setSession(),
-  }), []);
+    signOut: () =>{ setSession();
+      navigate(location.state?.from || "/", { replace: true });},
+  }), [navigate, location]);
+
+
+  if (!session) {
+    return null; 
+  }
 
   return (
     <AppProvider

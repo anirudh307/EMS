@@ -7,7 +7,7 @@ import Fingerprint from '@mui/icons-material/Fingerprint';
 import Notify from "./Notify.jsx";
 import LoginUser from "./User Componants/LoginUser.jsx";
 
-const UserLogin = ({ setShowNavbar }) => {
+const UserLogin = ({ setShowNavbar,setShowHeading }) => {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);  
@@ -41,7 +41,7 @@ const UserLogin = ({ setShowNavbar }) => {
           {/* Fade-in Effect for LoginUser */}
           <Fade in={showPage} timeout={800}>
             <div>
-              <LoginUser setShowNavbar={setShowNavbar} />
+              <LoginUser setShowNavbar={setShowNavbar} setShowHeading={setShowHeading}/>
             </div>
           </Fade>
         </>

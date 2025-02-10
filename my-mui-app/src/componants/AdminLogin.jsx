@@ -7,7 +7,7 @@ import Notify from "./Notify.jsx";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const AdminLogin = ({ setShowNavbar }) => {
+const AdminLogin = ({ setShowNavbar , setShowHeading}) => {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);  
@@ -39,7 +39,7 @@ const AdminLogin = ({ setShowNavbar }) => {
       {isLoggedIn ? (
         <Fade in={showPage} timeout={800}>
           <div>
-          <LoginAdmin setShowNavbar={setShowNavbar}/>
+          <LoginAdmin setShowNavbar={setShowNavbar} setShowHeading={setShowHeading}/>
           </div>
         </Fade>
       ) : (

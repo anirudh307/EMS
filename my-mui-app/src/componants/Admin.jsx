@@ -1,15 +1,16 @@
 import React from "react";
 import AdminLogin from "./AdminLogin";
 import { CssBaseline } from "@mui/material";
-import { useEffect } from "react";
+import { useState } from "react";
 import Heading from "./Heading";
 
 function Admin({setShowNavbar}) {
+  const [showHeading, setShowHeading] = useState(true);
   return (
     <>
-    <Heading/>
+    {showHeading && <Heading />}
       <CssBaseline />
-      <AdminLogin setShowNavbar={setShowNavbar}/>
+      <AdminLogin setShowNavbar={setShowNavbar} setShowHeading={setShowHeading}/>
     </>
   );
 }

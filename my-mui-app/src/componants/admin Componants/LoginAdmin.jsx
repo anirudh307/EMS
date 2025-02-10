@@ -12,6 +12,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LayersIcon from '@mui/icons-material/Layers';
 import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NAVIGATION = [
   { kind: 'header', title: 'Admin Panel' },
@@ -51,8 +52,10 @@ DemoPageContent.propTypes = {
   pathname: PropTypes.string.isRequired,
 };
 
-function LoginAdmin({ setShowNavbar }) {
+function LoginAdmin({ setShowNavbar , setShowHeading}) {
   const router = useDemoRouter('/dashboard');
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [session, setSession] = React.useState({
     user: {
@@ -69,6 +72,11 @@ function LoginAdmin({ setShowNavbar }) {
     return () => setShowNavbar(true);  // Show Navbar when LoginAdmin unmounts
   }, [setShowNavbar]);
 
+  useEffect(()=>{
+    setShowHeading(false);
+    return ()=> setShowHeading(true);
+  },[setShowHeading]);
+
   const authentication = React.useMemo(() => ({
     signIn: () => setSession({
       user: {
@@ -77,8 +85,13 @@ function LoginAdmin({ setShowNavbar }) {
         image: 'https://avatars.githubusercontent.com/u/19550456',
       },
     }),
-    signOut: () => setSession(null),
-  }), []);
+    signOut: () =>{ setSession(null);
+      navigate(location.state?.from || "/", { replace: true });},
+  }), [navigate, location]);
+
+  if(!session){
+    return null;
+  }
 
   return (
     <AppProvider

@@ -5,7 +5,7 @@ import Feedback from "./Feedback";
 function FeedbackMain({setShowNavbar}) {
   return (
     <>
-    <Heading/>
+
       <Feedback setShowNavbar={setShowNavbar}/>
     </>
   );

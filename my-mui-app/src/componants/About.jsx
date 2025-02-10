@@ -7,7 +7,7 @@ const About = () => {
   return (<>
          <div>
       {/* <h2 className="main-heading1">About Employee Administration System</h2> */}
-      <Heading></Heading>
+      <Heading/>
       </div>
         {/* Left Side - Text Content */}
         <div className="text-content1">
